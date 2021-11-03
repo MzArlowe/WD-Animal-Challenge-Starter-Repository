@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("./db");
-
+require("dotenv").config()
 const app = express();
 
 app.use(require("./middleware/headers"));
