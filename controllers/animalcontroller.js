@@ -40,12 +40,22 @@ router.delete("/delete/:id", async (req, res) => {
                 id: animalId,
             }
         };
-    await Animal.destroy(query);
-    res.status(200).json({
-        message: "Animal Entry Removed!"});
+        await Animal.destroy(query);
+        res.status(200).json({
+            message: "Animal Entry Removed!"
+        });
     } catch (err) {
-        res.status(500).json({ error: err});
+        res.status(500).json({ error: err });
     }
-    });
+});
+
+router.get("/", async (req, res) => {
+    try {
+        const entries = await Animal.findAll();
+        res.status(200).json(entries);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 module.exports = router;
