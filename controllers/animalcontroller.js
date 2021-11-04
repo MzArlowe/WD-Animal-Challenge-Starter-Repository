@@ -58,4 +58,28 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.put("/update/:id", async (req, res) => {
+    const { name, legNumber, predator } = req.body.animal;
+    const id = req.params.id;
+
+    const query = {
+        where: {
+            id: id
+        }
+    };
+
+    const updatedAnimal = {
+        name: name,
+        legNumber: legNumber,
+        predator: predator
+    };
+
+    try {
+        const update = await Animal.update(updatedAnimal, query);
+        res.status(200).json(update);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
 module.exports = router;
